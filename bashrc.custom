@@ -19,6 +19,7 @@ if [ `uname` == "Darwin" ]; then
 	# color on BSD version of bash works differently
 	alias ls='ls -GF'
 else
+	# default to the linux/gnu way of doing things!
 	alias ls='ls -F --color="always"'
 fi
 
