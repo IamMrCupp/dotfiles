@@ -1,27 +1,48 @@
+#!/bin/bash
 # my custom bashrc yo
 
-########################################################################
+#########################################################################
 #  source the global definitions
-########################################################################
+#########################################################################
 
 if [ -f /etc/bashrc ]; then
         . /etc/bashrc
 fi
 
-########################################################################
+#
+
+#########################################################################
 #  aliases ftw!!!
 #########################################################################
 
-alias ls='ls -GF'
+if [ `uname` == "Darwin" ]; then
+	# color on BSD version of bash works differently
+	alias ls='ls -GF'
+else
+	alias ls='ls -F --color="always"'
+fi
+
+
 alias l='ls -la'
 alias l.='ls -d .*'
 alias ll='ls -l'
 alias vi='vim'
 
 
+#########################################################################
 ##  My OSX Specifica Aliases here ##
-#alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
+#########################################################################
 
+if [ `uname` == "Darwin" ]; then
+	# Check for MacVim and setup alias if found
+	if [ -e "/Applicatons/MacVim.app" ]; then 
+		alias vim="/Applications/MacVim.app/Contents/MacOS/Vim" 
+	fi
+	# Check for Sublime Text and setup alias if found
+	if [ -e "/Applications/Sublime Text.app" ]; then 
+		alias subl="/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" 
+	fi
+fi
 
 ########################################################################
 #  let's make a custom prompt based on the terminals!!!  yay!!
