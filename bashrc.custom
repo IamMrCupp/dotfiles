@@ -27,6 +27,11 @@ alias l.='ls -d .*'
 alias ll='ls -l'
 alias vi='vim'
 
+# if git exists, let's fix our stupid typos ;)
+if [ -e "/usr/bin/git" ]; then
+	alias got="git"
+fi
+
 #########################################################################
 ##  My OSX Specifica Aliases here ##
 #########################################################################
@@ -36,6 +41,7 @@ if [ `uname` == "Darwin" ]; then
 	if [ -e "/Applicatons/MacVim.app" ]; then 
 		alias vim="/Applications/MacVim.app/Contents/MacOS/Vim" 
 	fi
+
 	# Check for Sublime Text and setup alias if found
 	if [ -e "/Applications/Sublime Text.app" ]; then 
 		alias subl="/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" 
