@@ -25,7 +25,24 @@ fi
 alias l='ls -la'
 alias l.='ls -d .*'
 alias ll='ls -l'
+alias k='kill -9'
+alias la='ls -la'
+alias c='clear'
+alias g='grep'
+alias h='history'
+alias hg='history|grep'
+alias m='more'
+alias mroot='mysql -uroot -premilondb'
+alias p='ps auxwww'
+alias pg='ps auxwww | grep'
 alias vi='vim'
+alias which='alias | /usr/bin/which --tty-only --read-alias --show-dot --show-tilde'
+alias whois='jwhois'
+
+# we all hate vi, so if vim is installed default to that as the vi editor
+if [ -e "/usr/bin/vim" ]; then
+	alias vi="vim"
+fi
 
 # if git exists, let's fix our stupid typos ;)
 if [ -e "/usr/bin/git" ]; then
@@ -33,7 +50,7 @@ if [ -e "/usr/bin/git" ]; then
 fi
 
 #########################################################################
-##  My OSX Specifica Aliases here ##
+##  My OSX Specific Aliases here ##
 #########################################################################
 
 if [ `uname` == "Darwin" ]; then
