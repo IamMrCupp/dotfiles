@@ -32,11 +32,10 @@ alias g='grep'
 alias h='history'
 alias hg='history|grep'
 alias m='more'
-alias mroot='mysql -uroot -premilondb'
 alias p='ps auxwww'
 alias pg='ps auxwww | grep'
 alias vi='vim'
-alias which='alias | /usr/bin/which --tty-only --read-alias --show-dot --show-tilde'
+#alias which='alias | /usr/bin/which --tty-only --read-alias --show-dot --show-tilde'
 alias whois='jwhois'
 
 # we all hate vi, so if vim is installed default to that as the vi editor
@@ -56,12 +55,18 @@ fi
 if [ `uname` == "Darwin" ]; then
 	# Check for MacVim and setup alias if found
 	if [ -e "/Applicatons/MacVim.app" ]; then 
-		alias vim="/Applications/MacVim.app/Contents/MacOS/Vim" 
+	    alias vim="/Applications/MacVim.app/Contents/MacOS/Vim" 
 	fi
 
 	# Check for Sublime Text and setup alias if found
 	if [ -e "/Applications/Sublime Text.app" ]; then 
-		alias subl="/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" 
+	    alias subl="/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" 
+	fi
+
+	# Check for MacVim and setup the alias if found
+	if [ -e "/Applications/MacVim.app" ]; then
+	    alias gvim="/Applications/MacVim.app/Contents/MacOS/MacVim"
+	    alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
 	fi
 fi
 
@@ -76,3 +81,22 @@ export PS1="\[\e[0m\]\[\e[32;1m\][ \[\e[0m\]\[\e[33;40m\]\t\[\e[0m\]\[\e[32;1m\]
 ########################################################################
 
 export PATH=$HOME/bin:$PATH
+
+if [ -e "/Applications/Postgres.app" ]; then
+	export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.3/bin
+fi
+
+# Add RVM to PATH for scripting
+if [ -e "$HOME/.rvm/bin" ]; then
+	export PATH="$PATH:$HOME/.rvm/bin" 
+fi
+
+
+########################################################################
+# Helper Functions!!!!
+########################################################################
+
+# Load RVM into a shell session *as a function*
+if [ -e "$HOME/.rvm/bin" ]; then
+	[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
+fi
