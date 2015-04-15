@@ -68,6 +68,11 @@ if [ `uname` == "Darwin" ]; then
 	    alias gvim="/Applications/MacVim.app/Contents/MacOS/MacVim"
 	    alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
 	fi
+
+	# Check for IntelliJ IDEA (pro version) and setup an alias for it
+	if [ -e "/Applications/IntelliJ IDEA 14" ]; then
+		alias idea="/Applications/IntelliJ IDEA 14.app/Contents/MacoOS/idea"
+	fi
 fi
 
 ########################################################################
