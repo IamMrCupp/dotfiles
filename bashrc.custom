@@ -71,7 +71,7 @@ if [ `uname` == "Darwin" ]; then
 
 	# Check for IntelliJ IDEA (pro version) and setup an alias for it
 	if [ -e "/Applications/IntelliJ IDEA 14.app" ]; then
-		alias idea="/Applications/IntelliJ\ IDEA\ 14.app/Contents/MacoOS/idea"
+		alias idea="/Applications/IntelliJ\ IDEA\ 14.app/Contents/MacOS/idea"
 	fi
 fi
 
