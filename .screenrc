@@ -1,0 +1,42 @@
+# default .screenrc for use everywhere
+
+shell -$SHELL
+autodetach on
+defscrollback 50000
+nonblock off
+zombie "^[r"
+startup_message off
+termcapinfo xterm* ti@:te@
+
+# enabled if there is no hardstatus setting for your terminal)
+#hardstatus on
+#hardstatus alwayslastline
+#hardstatus string "%w"
+#hardstatus string "%{.kW}%-w%{.W}%n %t%{-}%+w"
+#hardstatus string "%{.kW}%-w%{.W}%n %t%{-}%+w %=%c %d/%m/%Y" #black+white+bold
+#hardstatus string "%{.kw}%-w%{.w}%n %t%{-}%+w %=%c %d/%m/%Y" #black+white+normal
+#hardstatus string "%{.kw}%-w%{.Kw}%n %t%{-}%+w %=%c %d/%m/%Y" #black+grey+normal
+#hardstatus string "%{.kc}%-w%{.kc}%n*%t%{-}%+w %=%c %d/%m/%Y" #black+cyan+normal
+#hardstatus string "%{.kc}%-w%{.kw}%n*%t%{-}%+w %= %2` %3`/%4` %6`/%7` %5`/%9` %c %d/%m/%Y" #black+cyan+normal+white selected
+#hardstatus string "%{.kc}%-w%{.kw}%n*%t%{-}%+w %= | %1` | %2`C | %3`/%4` | %6`/%7` | %5` | %c %d/%m/%Y" #with dwm status bar
+#hardstatus string '%{= kB}%-Lw%{+r}%50> %n%f* %t%{= kB}%+Lw%< %{= kB}%-= %{-}'
+#hardstatus alwayslastline '%{bk}[ %{W}%H %{b}][ %{w}%l%{b} ]   %{b}[%{w} %D %d.%m %c:%s%{b} ]'
+#hardstatus alwayslastline '%{= M} %H%{= G} %l %= %{= w}%-w%{+b r}%n*%t%{-b r}%{w}%+w %= %{c}%d %D %{B}%c '
+#hardstatus alwayslastline '%{= w}%-w%{+b r}%n*%t%{-b r}%{w}%+w %= %{c}%d %D %{B}%c '
+
+# make our windowlist a little more pretty
+windowlist string "%3n %t   %h%=%f"
+
+# change/add some keybindings to make life easier
+bindkey "[D" prev  # ctrl-left
+bindkey "[C" next  # ctrl-right
+
+# add some more C-a binds to change windows 10-16
+bind q select 10
+bind w select 11
+bind e select 12
+bind r select 13
+bind t select 14
+bind t select 15
+bind y select 16
+bind u select 17
