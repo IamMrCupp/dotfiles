@@ -103,6 +103,13 @@ fi
 #	[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
 #fi
 
+# passwords are a nice thing to have handy
+genpasswd() {
+   local l=$1
+   [ "$l" == "" ] && l=16
+        tr -dc A-Za-z0-9_ < /dev/urandom | head -c ${l} | xargs
+}
+
 ########################################################################
 #  let's make a custom prompt based on the terminals!!!  yay!!
 ########################################################################
