@@ -69,6 +69,10 @@ if [ `uname` == "Darwin" ]; then
 	    alias subl='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl' 
 	fi
 
+        # Check for IntelliJ IDEA (pro version) and setup an alias for it
+        if [ -e "/Applications/IntelliJ IDEA 14.app" ]; then
+	    alias idea="/Applications/IntelliJ\ IDEA\ 14.app/Contents/MacOS/idea"
+        fi
 fi
 
 ########################################################################
