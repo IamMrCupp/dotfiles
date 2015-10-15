@@ -46,6 +46,9 @@ fi
 # if git exists, let's fix our stupid typos ;)
 if [ -e "/usr/bin/git" ]; then
 	alias got="git"
+	alias gc="git checkout"
+        alias gcb="git checkout -b"
+        alias gm="git merge"
 fi
 
 # if thefuck is on the system, them alias it as fuck or fuckme
