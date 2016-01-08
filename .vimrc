@@ -1,6 +1,6 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
+set nocompatible               " be iMproved, required
+filetype off                   " required
+set backspace=indent,eol,start " we want to be able to use our backspace key
 "
 " Vundle Stuff Here
 "
@@ -59,7 +59,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsExpandTrigger="<c-tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 

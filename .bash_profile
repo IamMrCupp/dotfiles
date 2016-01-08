@@ -1,5 +1,5 @@
 #!/bin/bash
-# my custom bashrc yo
+# Custom .bash_profile for OSX / Linux / Unix machines w/ bash or dash
 
 #########################################################################
 #  source the global definitions
@@ -34,17 +34,16 @@ alias hg='history|grep'
 alias m='more'
 alias p='ps auxwww'
 alias pg='ps auxwww | grep'
-alias vi='vim'
 #alias which='alias | /usr/bin/which --tty-only --read-alias --show-dot --show-tilde'
 #alias whois='jwhois'
 
 # we all hate vi, so if vim is installed default to that as the vi editor
-if [ -e "/usr/bin/vim" ]; then
+if [ -e "`which vim`" ]; then
 	alias vi="vim"
 fi
 
 # if git exists, let's fix our stupid typos ;)
-if [ -e "/usr/bin/git" ]; then
+if [ -e "`which git`" ]; then
 	alias got="git"
 	alias gc="git checkout"
         alias gcb="git checkout -b"
