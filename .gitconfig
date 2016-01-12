@@ -1,0 +1,33 @@
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f
+[user]
+	name = Aaron Cupp
+	email = mrcupp@mrcupp.com
+[push]
+	default = simple
+[alias]
+	s = status -s
+	l = log --graph --pretty=format:'%Cred%h%Creset %C(yellow)%an%d%Creset %s %Cgreen(%cr)%Creset' --date=relative
+	ll = log --pretty=format:'%C(yellow)%h%Cred%d %Cblue [%cn] %s %Cgreen(%cr)%Creset' --decorate --numstat --date=relative
+	bdiff = !git l $1..$2
+	pro = pull --rebase origin
+	po = push origin
+	co = checkout
+	ahead = !git l @{u}..
+	ignore = update-index --assume-unchanged
+	unignore = update-index --no-assume-unchanged
+	ignored = !git ls-files -v | grep "^[[:lower:]]"
+	unmerged = !git l master..@{u}
+	restore-file = !git checkout $(git rev-list -n 1 HEAD -- "$1")~1 -- "$1"
+	update-from = "!f() { git fetch $1 --prune; git merge --ff-only $1/$2 || git rebase --preserve-merges $1/$2; }; f"
+	stat = status --short
+[core]
+	editor = mvim -f
+[credential]
+	helper = osxkeychain
+[color]
+	status = auto
+	branch = auto
+	interactive = auto
+	diff = auto
