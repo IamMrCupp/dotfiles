@@ -23,7 +23,7 @@
 	update-from = "!f() { git fetch $1 --prune; git merge --ff-only $1/$2 || git rebase --preserve-merges $1/$2; }; f"
 	stat = status --short
 [core]
-	editor = mvim -f
+	editor = vim -f
 [credential]
 	helper = osxkeychain
 [color]
@@ -31,3 +31,5 @@
 	branch = auto
 	interactive = auto
 	diff = auto
+[status]
+	displayCommentPrefix = true
