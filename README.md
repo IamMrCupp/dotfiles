@@ -1,6 +1,7 @@
 Helpers
 =======
 
+
 Things that help make life easier on my machines
 
     * **.bash_profile**	.bash_profile file with lots of aliases and helpers
