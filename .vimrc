@@ -46,7 +46,7 @@ syntax on
 filetype plugin indent on
 
 set modelines=4
-set shiftwidth=4 softtabstop=4
+set shiftwidth=2 softtabstop=2
 set incsearch ignorecase hlsearch
 
 set statusline+=%#warningmsg#
