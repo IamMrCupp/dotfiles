@@ -97,13 +97,21 @@ if [ -e "/usr/local/mysql" ]; then
 fi
 
 ########################################################################
-# Helper Functions!!!!
+# Helper Functions and Stuff!!!
 ########################################################################
 
 # Load RVM into a shell session *as a function*
 #if [ -e "$HOME/.rvm/bin" ]; then
 #	[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
 #fi
+
+# OSX Specific here
+if [ `uname` == "Darwin" ]; then
+    # is docker is on the machine, let's source it's info
+    if [ -e "/usr/local/bin/docker" ]; then
+	eval $(docker-machine env default)
+    fi
+fi
 
 # passwords are a nice thing to have handy
 genpasswd() {
