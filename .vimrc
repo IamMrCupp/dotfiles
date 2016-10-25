@@ -45,6 +45,7 @@ filetype plugin indent on    " required
 syntax on
 filetype plugin indent on
 
+set ruler
 set modelines=4
 set shiftwidth=2 softtabstop=2
 set incsearch ignorecase hlsearch
