@@ -112,10 +112,8 @@ if [ `uname` == "Darwin" ]; then
   fi
 
   # bash-completion setup?  (homebrew here)
-  if [ -e "/usr/local/etc/bash-completion.d" ]; then
-    if [ -f $(brew --prefix)/etc/bash_completion ]; then
-      . $(brew --prefix)/etc/bash_completion
-    fi
+  if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    . $(brew --prefix)/etc/bash_completion
   fi
 fi
 
