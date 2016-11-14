@@ -6,7 +6,7 @@
 #########################################################################
 
 if [ -f /etc/bashrc ]; then
-        . /etc/bashrc
+  . /etc/bashrc
 fi
 
 #########################################################################
@@ -14,11 +14,11 @@ fi
 #########################################################################
 
 if [ `uname` == "Darwin" ]; then
-	# color on BSD version of bash works differently
-	alias ls='ls -GF'
+  # color on BSD version of bash works differently
+  alias ls='ls -GF'
 else
-	# default to the linux/gnu way of doing things!
-	alias ls='ls -F --color="always"'
+  # default to the linux/gnu way of doing things!
+  alias ls='ls -F --color="always"'
 fi
 
 
@@ -39,20 +39,20 @@ alias pg='ps auxwww | grep'
 
 # we all hate vi, so if vim is installed default to that as the vi editor
 if [ -e "`which vim`" ]; then
-	alias vi="vim"
+  alias vi="vim"
 fi
 
 # if git exists, let's fix our stupid typos ;)
 if [ -e "`which git`" ]; then
-	alias got="git"
-	alias gc="git checkout"
-        alias gcb="git checkout -b"
-        alias gm="git merge"
+  alias got="git"
+  alias gc="git checkout"
+  alias gcb="git checkout -b"
+  alias gm="git merge"
 fi
 
 # if thefuck is on the system, them alias it as fuck or fuckme
 if [ -e "/usr/local/bin/thefuck" ]; then
-    alias fuck='$(thefuck $(fc -ln -1))'
+  alias fuck='$(thefuck $(fc -ln -1))'
 fi
 
 #########################################################################
@@ -60,21 +60,20 @@ fi
 #########################################################################
 
 if [ `uname` == "Darwin" ]; then
-	# Check for MacVim and setup alias if found
-	if [ -e "/Applicatons/MacVim.app" ]; then 
-	    alias vim="/Applications/MacVim.app/Contents/MacOS/Vim" 
-	    alias gvim="mvim"
-	fi
+  # Check for MacVim and setup alias if found
+  if [ -e "/Applicatons/MacVim.app" ]; then 
+    alias vim="/Applications/MacVim.app/Contents/MacOS/Vim" 
+    alias gvim="mvim"
+  fi
+  # Check for Sublime Text and setup alias if found
+  if [ -e "/Applications/Sublime Text.app" ]; then 
+    alias subl='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl' 
+  fi
 
-	# Check for Sublime Text and setup alias if found
-	if [ -e "/Applications/Sublime Text.app" ]; then 
-	    alias subl='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl' 
-	fi
-
-        # Check for IntelliJ IDEA (pro version) and setup an alias for it
-        if [ -e "/Applications/IntelliJ IDEA 14.app" ]; then
-	    alias idea="/Applications/IntelliJ\ IDEA\ 14.app/Contents/MacOS/idea"
-        fi
+  # Check for IntelliJ IDEA (pro version) and setup an alias for it
+  if [ -e "/Applications/IntelliJ IDEA 14.app" ]; then
+    alias idea="/Applications/IntelliJ\ IDEA\ 14.app/Contents/MacOS/idea"
+  fi
 fi
 
 ########################################################################
@@ -84,7 +83,7 @@ fi
 export PATH=$HOME/bin:$PATH
 
 if [ -e "/Applications/Postgres.app" ]; then
-	export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.3/bin
+  export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.3/bin
 fi
 
 # Add RVM to PATH for scripting
@@ -93,7 +92,7 @@ fi
 #fi
 
 if [ -e "/usr/local/mysql" ]; then
-	export PATH="$PATH:/usr/local/mysql:/usr/local/mysql/bin"
+  export PATH="$PATH:/usr/local/mysql:/usr/local/mysql/bin"
 fi
 
 ########################################################################
@@ -107,17 +106,24 @@ fi
 
 # OSX Specific here
 if [ `uname` == "Darwin" ]; then
-    # is docker is on the machine, let's source it's info
-    if [ -e "/usr/local/bin/docker" ]; then
-	eval $(docker-machine env default)
+  # is docker is on the machine, let's source it's info
+  if [ -e "/usr/local/bin/docker" ]; then
+    eval $(docker-machine env default)
+  fi
+
+  # bash-completion setup?  (homebrew here)
+  if [ -e "/usr/local/etc/bash-completion.d" ]; then
+    if [ -f $(brew --prefix)/etc/bash_completion ]; then
+      . $(brew --prefix)/etc/bash_completion
     fi
+  fi
 fi
 
 # passwords are a nice thing to have handy
 genpasswd() {
-   local l=$1
-   [ "$l" == "" ] && l=16
-        tr -dc A-Za-z0-9_ < /dev/urandom | head -c ${l} | xargs
+  local l=$1
+  [ "$l" == "" ] && l=16
+    tr -dc A-Za-z0-9_ < /dev/urandom | head -c ${l} | xargs
 }
 
 ########################################################################
@@ -162,21 +168,22 @@ function parse_git_branch {
   fi
 }
 function prompt_func() {
-    previous_return_value=$?;
-    #prompt="${TITLEBAR}${BLUE}[${RED}\w${GREEN}$(parse_git_branch)${BLUE}]${COLOR_NONE} "
-    #prompt="\h:${USER_COLOR}\u${COLOR_NONE}:${YELLOW}\w${GREEN}$(parse_git_branch)${COLOR_NONE}:"
-    prompt="${GREEN}[ ${LIGHT_YELLOW}\t ${GREEN}- ${LIGHT_RED}\u ${COLOR_NONE}@ ${CYAN}\h ${LIGHT_GREEN}- ${BLUE}\w ${GREEN}] ${GREEN}$(parse_git_branch)${COLOR_NONE}:"
-    if test $previous_return_value -eq 0
-    then
-        PS1="${prompt}\\$ "
-        #PS1="${prompt}➔ "
-    else
-        PS1="${prompt}${RED}➔${COLOR_NONE} "
-    fi
+  previous_return_value=$?;
+  #prompt="${TITLEBAR}${BLUE}[${RED}\w${GREEN}$(parse_git_branch)${BLUE}]${COLOR_NONE} "
+  #prompt="\h:${USER_COLOR}\u${COLOR_NONE}:${YELLOW}\w${GREEN}$(parse_git_branch)${COLOR_NONE}:"
+  prompt="${GREEN}[ ${LIGHT_YELLOW}\t ${GREEN}- ${LIGHT_RED}\u ${COLOR_NONE}@ ${CYAN}\h ${LIGHT_GREEN}- ${BLUE}\w ${GREEN}] ${GREEN}$(parse_git_branch)${COLOR_NONE}:"
+  if test $previous_return_value -eq 0
+  then
+    PS1="${prompt}\\$ "
+    #PS1="${prompt}➔ "
+  else
+    PS1="${prompt}${RED}➔${COLOR_NONE} "
+  fi
 }
 
 PROMPT_COMMAND=prompt_func
-
-
 #export PS1="${GREEN}[ ${YELLOW}\t${GREEN} - ${LIGHT_RED}\u ${COLOR_NONE} @ ${CYAN}\h ${LIGHT_GREEN}- ${BLUE}\w ${GREEN} ] \$ "
 
+
+# iterm2 shell integration stuff here!!
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
