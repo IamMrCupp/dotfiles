@@ -60,11 +60,13 @@ fi
 #########################################################################
 
 if [ `uname` == "Darwin" ]; then
+  
   # Check for MacVim and setup alias if found
-  if [ -e "/Applicatons/MacVim.app" ]; then 
-    alias vim="/Applications/MacVim.app/Contents/MacOS/Vim" 
+  if [ -e "/usr/local/opt/macvim/MacVim.app" ]; then 
+    alias vim="/usr/local/opt/macvim/MacVim.app/Contents/MacOS/Vim" 
     alias gvim="mvim"
   fi
+
   # Check for Sublime Text and setup alias if found
   if [ -e "/Applications/Sublime Text.app" ]; then 
     alias subl='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl' 
