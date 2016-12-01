@@ -123,7 +123,11 @@ fi
 genpasswd() {
   local l=$1
   [ "$l" == "" ] && l=16
-    tr -dc A-Za-z0-9_ < /dev/urandom | head -c ${l} | xargs
+    if [ `uname` == "Darwin" ]; then
+      LC_CTYPE=C && LANG=C tr -dc A-Za-z0-9_ < /dev/urandom | head -c ${l} | xargs
+    else
+      tr -dc A-Za-z0-9_ < /dev/urandom | head -c ${l} | xargs
+    fi
 }
 
 ########################################################################
