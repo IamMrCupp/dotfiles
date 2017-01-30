@@ -22,6 +22,7 @@
 	restore-file = !git checkout $(git rev-list -n 1 HEAD -- "$1")~1 -- "$1"
 	update-from = "!f() { git fetch $1 --prune; git merge --ff-only $1/$2 || git rebase --preserve-merges $1/$2; }; f"
 	stat = status --short
+	fap = fetch --all --prune
 [core]
 	editor = vim -f
 [credential]
