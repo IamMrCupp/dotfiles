@@ -117,6 +117,11 @@ if [ `uname` == "Darwin" ]; then
   if [ -d $(brew --prefix)/etc/bash_completion.d ]; then
     . $(brew --prefix)/etc/bash_completion.d/*
   fi
+
+  # awscli completion
+  if [ -e "/usr/local/bin/aws_completer" ]; then
+    complete -C '/usr/local/bin/aws_completer' aws
+  fi
 fi
 
 # passwords are a nice thing to have handy
