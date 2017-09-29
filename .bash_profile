@@ -55,6 +55,10 @@ if [ -e "/usr/local/bin/thefuck" ]; then
   alias fuck='$(thefuck $(fc -ln -1))'
 fi
 
+if [ -e "/usr/local/bin/hub" ]; then
+  alias git="hub"
+fi
+
 #########################################################################
 ##  My OSX Specific Aliases here ##
 #########################################################################
@@ -115,7 +119,11 @@ if [ `uname` == "Darwin" ]; then
 
   # bash-completion setup?  (homebrew here)
   if [ -d $(brew --prefix)/etc/bash_completion.d ]; then
-    . $(brew --prefix)/etc/bash_completion.d/*
+    source $(brew --prefix)/etc/bash_completion.d/*
+  fi
+
+  if [ -e $(brew --prefix)/etc/bash_completion ]; then
+    source "$(brew --prefix)/etc/bash_completion"
   fi
 
   # awscli completion
