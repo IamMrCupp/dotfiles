@@ -80,6 +80,7 @@ if [ `uname` == "Darwin" ]; then
   if [ -e "/Applications/IntelliJ IDEA 14.app" ]; then
     alias idea="/Applications/IntelliJ\ IDEA\ 14.app/Contents/MacOS/idea"
   fi
+
 fi
 
 ########################################################################
@@ -129,6 +130,11 @@ if [ `uname` == "Darwin" ]; then
   # awscli completion
   if [ -e "/usr/local/bin/aws_completer" ]; then
     complete -C '/usr/local/bin/aws_completer' aws
+  fi
+
+  # perl from homebrew
+  if [ -e "/usr/local/bin/perl"]; then
+    eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
   fi
 fi
 
