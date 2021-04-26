@@ -133,9 +133,9 @@ if [ `uname` == "Darwin" ]; then
   fi
 
   # perl from homebrew
-  if [ -e "/usr/local/bin/perl" ]; then
-    eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
-  fi
+  #if [ -e "/usr/local/bin/perl" ]; then
+  #  eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
+  #fi
 fi
 
 # passwords are a nice thing to have handy
