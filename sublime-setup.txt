@@ -1,0 +1,62 @@
+Install Package Control
+
+	General Helpers
+	*	SideBarEnhancements		(helper)						[]
+	*	AllComplete 			(word completer)				[https://github.com/alienhard/SublimeAllAutocomplete]
+	*	Terminal				(terminal helper)				[https://github.com/wbond/sublime_terminal]
+	* 	SublimeREPL 			(interpretor for languages)		[https://github.com/wuub/SublimeREPL]
+	* 	ColorPicker 			(color picker)					[http://weslly.github.io/ColorPicker/]
+	*	DocBlockr				(documentation helper)			[https://github.com/spadgos/sublime-jsdocs]
+	* 	TodoReview				(todo/note helper)				[https://packagecontrol.io/packages/TodoReview]
+	*	Markdown Preview		(markdown helper)				[https://github.com/revolunet/sublimetext-markdown-preview]
+ 	*	SublimeLinter 			(sublime linter framework)		[]
+
+	Git Helpers
+	* 	Git 					(git helper)					[https://github.com/kemayo/sublime-text-git]
+	*	GitGutter				(git helper)					[https://github.com/jisaacks/GitGutter]
+
+ 	HTML Helpers
+	*	Emmet					(html helper)					[http://emmet.io/]
+	* 	Sass					(Sass and CSS Helper)			[https://packagecontrol.io/packages/Sass]
+	*	SublimeLinter-csslint	(css linter)
+
+	Javascript Helpers
+	*	SublimeLinter-jshint	()
+	*	SublimeLinter-html-tidy (html linter)
+
+ 	Python Helpers
+	*	Anaconda				(python)						[]
+	*	Djaneiro				(python-django)					[]
+	*	requirementstxt			(requirements.txt helper)		[]
+	*	SublimeLinter-pyflakes	(python linter)					[https://packagecontrol.io/packages/SublimeLinter-pyflakes]
+	*	SublimeLinter-pep8		()
+	*	SublimeLinter-pyyaml	()
+	*	SublimeLinter-json		(json linter)					[]
+
+	Go Helpers
+	*
+	*
+	
+	BASH Scripting Helpers
+	*
+	*
+
+	Terraform Helpers
+	*
+	*
+
+	Docker Helpers
+	*
+	*
+
+	Kubernetes Helpers
+	*
+	*
+
+	Ansible Helpers
+	*
+	*
+
+	Puppet Helpers
+	*
+	*
