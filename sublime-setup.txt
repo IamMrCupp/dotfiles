@@ -1,37 +1,42 @@
 Install Package Control
 
 	General Helpers
-	*	SideBarEnhancements		(helper)						[]
-	*	AllComplete 			(word completer)				[https://github.com/alienhard/SublimeAllAutocomplete]
-	*	Terminal				(terminal helper)				[https://github.com/wbond/sublime_terminal]
-	* 	SublimeREPL 			(interpretor for languages)		[https://github.com/wuub/SublimeREPL]
-	* 	ColorPicker 			(color picker)					[http://weslly.github.io/ColorPicker/]
-	*	DocBlockr				(documentation helper)			[https://github.com/spadgos/sublime-jsdocs]
-	* 	TodoReview				(todo/note helper)				[https://packagecontrol.io/packages/TodoReview]
-	*	Markdown Preview		(markdown helper)				[https://github.com/revolunet/sublimetext-markdown-preview]
- 	*	SublimeLinter 			(sublime linter framework)		[]
+	*	SideBarEnhancements						(helper)						[https://packagecontrol.io/packages/SideBarEnhancements]
+	*	AllComplete 							(word completer)				[https://github.com/alienhard/SublimeAllAutocomplete]
+	*	Terminal								(terminal helper)				[https://github.com/wbond/sublime_terminal]
+	* 	SublimeREPL 							(interpretor for languages)		[https://github.com/wuub/SublimeREPL]
+	* 	ColorPicker 							(color picker)					[http://weslly.github.io/ColorPicker/]
+	*	DocBlockr								(documentation helper)			[https://github.com/spadgos/sublime-jsdocs]
+	* 	TodoReview								(todo/note helper)				[https://packagecontrol.io/packages/TodoReview]
+	*	Markdown Preview						(markdown helper)				[https://github.com/revolunet/sublimetext-markdown-preview]
+ 	*	SublimeLinter 							(sublime linter framework)		[]
+ 	* 	AutoFileName							(filename helper)				[https://packagecontrol.io/packages/AutoFileName]
+ 	*	BracketHighlighter						(bracket highlighter)			[https://packagecontrol.io/packages/BracketHighlighter]
+ 	*	AFileIcon								(file icons)					[https://packagecontrol.io/packages/A%20File%20Icon]
+ 	*	ApplySyntax								(syntax detector)				[https://packagecontrol.io/packages/ApplySyntax]
+ 	* 	Dotfiles Syntax Highlighting 			(syntax hightlight)				[https://packagecontrol.io/packages/Dotfiles%20Syntax%20Highlighting]
 
 	Git Helpers
-	* 	Git 					(git helper)					[https://github.com/kemayo/sublime-text-git]
-	*	GitGutter				(git helper)					[https://github.com/jisaacks/GitGutter]
+	* 	Git 									(git helper)					[https://github.com/kemayo/sublime-text-git]
+	*	GitGutter								(git helper)					[https://github.com/jisaacks/GitGutter]
 
  	HTML Helpers
-	*	Emmet					(html helper)					[http://emmet.io/]
-	* 	Sass					(Sass and CSS Helper)			[https://packagecontrol.io/packages/Sass]
-	*	SublimeLinter-csslint	(css linter)
+	*	Emmet									(html helper)					[http://emmet.io/]
+	* 	Sass									(Sass and CSS Helper)			[https://packagecontrol.io/packages/Sass]
+	*	SublimeLinter-csslint					(css linter)
 
 	Javascript Helpers
-	*	SublimeLinter-jshint	()
-	*	SublimeLinter-html-tidy (html linter)
+	*	SublimeLinter-jshint					()
+	*	SublimeLinter-html-tidy 				(html linter)
 
  	Python Helpers
-	*	Anaconda				(python)						[]
-	*	Djaneiro				(python-django)					[]
-	*	requirementstxt			(requirements.txt helper)		[]
-	*	SublimeLinter-pyflakes	(python linter)					[https://packagecontrol.io/packages/SublimeLinter-pyflakes]
-	*	SublimeLinter-pep8		()
-	*	SublimeLinter-pyyaml	()
-	*	SublimeLinter-json		(json linter)					[]
+	*	Anaconda								(python)						[]
+	*	Djaneiro								(python-django)					[]
+	*	requirementstxt							(requirements.txt helper)		[]
+	*	SublimeLinter-pyflakes					(python linter)					[https://packagecontrol.io/packages/SublimeLinter-pyflakes]
+	*	SublimeLinter-pep8						()
+	*	SublimeLinter-pyyaml					()
+	*	SublimeLinter-json						(json linter)					[]
 
 	Go Helpers
 	*
@@ -42,21 +47,27 @@ Install Package Control
 	*
 
 	Terraform Helpers
-	*
-	*
+	*	Terraform								(terraform syntax)				[]
+	*	SublimeLinter-contrib-terraform			(terraform linter)				[]
+
 
 	Docker Helpers
-	*
-	*
+	*	Dockerfile Syntax Highlighting			(synax highlight)				[https://packagecontrol.io/packages/Dockerfile%20Syntax%20Highlighting]
+	*	SublimeLinter-contrib-dockerfilelint	(syntax linter)					[https://packagecontrol.io/packages/SublimeLinter-contrib-dockerfilelint]
 
-	Kubernetes Helpers
-	*
-	*
 
 	Ansible Helpers
+	*	Ansible									(ansible syntax)				[https://packagecontrol.io/packages/Ansible]
+	*	SublimeLinter-contrib0ansible-lint		(ansible linter)				[https://packagecontrol.io/packages/SublimeLinter-contrib-ansible-lint]
+
+	Puppet Helpers
 	*
 	*
 
-	Puppet Helpers
+	YAML Helpers
+	*
+	*
+
+	Ruby Helpers
 	*
 	*
