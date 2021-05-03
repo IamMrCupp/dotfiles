@@ -50,7 +50,7 @@ Install Package Control
 
 	Ansible Helpers
 	*	Ansible									(ansible syntax)				[https://packagecontrol.io/packages/Ansible]
-	*	SublimeLinter-contrib0ansible-lint		(ansible linter)				[https://packagecontrol.io/packages/SublimeLinter-contrib-ansible-lint]
+	*	SublimeLinter-contrib-ansible-lint		(ansible linter)				[https://packagecontrol.io/packages/SublimeLinter-contrib-ansible-lint]
 
 	Go Helpers
 	*
