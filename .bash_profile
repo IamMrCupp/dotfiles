@@ -119,13 +119,14 @@ if [ `uname` == "Darwin" ]; then
   fi
 
   # bash-completion setup?  (homebrew here)
-  if [ -d $(brew --prefix)/etc/bash_completion.d ]; then
-    source $(brew --prefix)/etc/bash_completion.d/*
-  fi
+  # if [ -d $(brew --prefix)/etc/bash_completion.d ]; then
+  #    source "$(brew --prefix)/etc/bash_completion.d/"*
+  #  fi
 
-  if [ -e $(brew --prefix)/etc/bash_completion ]; then
-    source "$(brew --prefix)/etc/bash_completion"
-  fi
+  # if [ -e $(brew --prefix)/etc/bash_completion ]; then
+  #   source "$(brew --prefix)/etc/bash_completion"
+  # fi
+  # 
 
   # awscli completion
   if [ -e "/usr/local/bin/aws_completer" ]; then
@@ -136,9 +137,23 @@ if [ `uname` == "Darwin" ]; then
   #if [ -e "/usr/local/bin/perl" ]; then
   #  eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
   #fi
+  #
+  #
+  
+  # homebrew specific bash completion
+  if type brew &>/dev/null; then
+    HOMEBREW_PREFIX="$(brew --prefix)"
+    if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
+      source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
+    else
+      for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*; do
+       [[ -r "$COMPLETION" ]] && source "$COMPLETION"
+      done
+    fi
+  fi
 fi
 
-# passwords are a nice thing to have handy
+# password generation function
 genpasswd() {
   local l=$1
   [ "$l" == "" ] && l=16
