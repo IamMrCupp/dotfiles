@@ -93,19 +93,14 @@ if [ -e "/Applications/Postgres.app" ]; then
   export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.3/bin
 fi
 
-# Add RVM to PATH for scripting
-#if [ -e "$HOME/.rvm/bin" ]; then
-#	export PATH="$PATH:$HOME/.rvm/bin" 
-#fi
-
 if [ -e "/usr/local/mysql" ]; then
   export PATH="$PATH:/usr/local/mysql:/usr/local/mysql/bin"
 fi
 
-# Check for VS Code and include it in the path for use on cli
-if [ -e "/Applications/" ]; then
-  export PATH="\$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+if [ -e "/Applications/Visual Studio Code.app" ]; then
+  export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 fi
+
 ########################################################################
 # Helper Functions and Stuff!!!
 ########################################################################
