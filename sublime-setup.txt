@@ -9,6 +9,8 @@ Install Package Control
 	*	DocBlockr								(documentation helper)			[https://github.com/spadgos/sublime-jsdocs]
 	* 	TodoReview								(todo/note helper)				[https://packagecontrol.io/packages/TodoReview]
 	*	Markdown Preview						(markdown helper)				[https://github.com/revolunet/sublimetext-markdown-preview]
+	*	MarkdownEditing
+	*	LiveReload
  	*	SublimeLinter 							(sublime linter framework)		[]
  	* 	AutoFileName							(filename helper)				[https://packagecontrol.io/packages/AutoFileName]
  	*	BracketHighlighter						(bracket highlighter)			[https://packagecontrol.io/packages/BracketHighlighter]

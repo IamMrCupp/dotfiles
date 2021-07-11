@@ -102,6 +102,10 @@ if [ -e "/usr/local/mysql" ]; then
   export PATH="$PATH:/usr/local/mysql:/usr/local/mysql/bin"
 fi
 
+# Check for VS Code and include it in the path for use on cli
+if [ -e "/Applications/" ]; then
+  export PATH="\$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+fi
 ########################################################################
 # Helper Functions and Stuff!!!
 ########################################################################
@@ -114,19 +118,19 @@ fi
 # OSX Specific here
 if [ `uname` == "Darwin" ]; then
   # is docker is on the machine, let's source it's info
-  if [ -e "/usr/local/bin/docker" ]; then
-    eval $(docker-machine env default)
-  fi
+  # if [ -e "/usr/local/bin/docker" ]; then
+  #   eval $(docker-machine env default)
+  # fi
 
   # bash-completion setup?  (homebrew here)
   # if [ -d $(brew --prefix)/etc/bash_completion.d ]; then
   #    source "$(brew --prefix)/etc/bash_completion.d/"*
   #  fi
 
-  # if [ -e $(brew --prefix)/etc/bash_completion ]; then
-  #   source "$(brew --prefix)/etc/bash_completion"
-  # fi
-  # 
+  if [ -e $(brew --prefix)/etc/bash_completion ]; then
+    source "$(brew --prefix)/etc/bash_completion"
+  fi
+  
 
   # awscli completion
   if [ -e "/usr/local/bin/aws_completer" ]; then
