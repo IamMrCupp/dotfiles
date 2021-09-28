@@ -1,12 +1,64 @@
 #!/bin/bash
 # Custom .bash_profile for OSX / Linux / Unix machines w/ bash or dash
-
+#
+#
+# This requires some things to be installed:
+# homebrew
+# - brew install bash-completion
+# - brew install bash-git-prompt
+# - brew install kube-ps1
+# - brew install kubectl
+# - brew install kubectx
+# - brew install hub
+# - brew install kubectx-completion
+#
 #########################################################################
 #  source the global definitions
 #########################################################################
 
 if [ -f /etc/bashrc ]; then
   . /etc/bashrc
+fi
+
+#########################################################################
+#   Custom Environment Variables via hidden files
+#########################################################################
+with_env() {
+  (set -a && . ./.env && "$@")
+}
+
+#########################################################################
+#   Custom Environment Variables 
+#########################################################################
+# go development related
+export GOPATH="${HOME}/.go"
+export GOROOT="$(brew --prefix golang)/libexec"
+export PATH="$PATH:$GOPATH/bin:${GOROOT}/bin"
+
+###############################################################################
+#                       ENABLE BASH COMPLETION                                #
+###############################################################################
+
+# homebrew specific bash completion
+if type brew &>/dev/null; then
+  HOMEBREW_PREFIX="$(brew --prefix)"
+  if [ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]; then
+    source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
+  else
+    for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*; do
+      [[ -r "$COMPLETION" ]] && source "$COMPLETION"
+    done
+  fi
+fi
+
+# aks-engine bash completions
+if [ -f /usr/local/bin/aks-engine ]; then
+  source <(aks-engine completion)
+fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/mnt/c/Users/aaron/Downloads/google-cloud-sdk/completion.bash.inc' ]; then
+  source '/mnt/c/Users/aaron/Downloads/google-cloud-sdk/completion.bash.inc';
 fi
 
 #########################################################################
@@ -21,11 +73,9 @@ else
   alias ls='ls -F --color="always"'
 fi
 
-
 alias l='ls -la'
 alias l.='ls -d .*'
 alias ll='ls -l'
-alias k='kill -9'
 alias la='ls -la'
 alias c='clear'
 alias g='grep'
@@ -34,8 +84,6 @@ alias hg='history|grep'
 alias m='more'
 alias p='ps auxwww'
 alias pg='ps auxwww | grep'
-#alias which='alias | /usr/bin/which --tty-only --read-alias --show-dot --show-tilde'
-#alias whois='jwhois'
 
 # we all hate vi, so if vim is installed default to that as the vi editor
 if [ -e "`which vim`" ]; then
@@ -50,14 +98,25 @@ if [ -e "`which git`" ]; then
   alias gm="git merge"
 fi
 
-# if thefuck is on the system, them alias it as fuck or fuckme
-if [ -e "/usr/local/bin/thefuck" ]; then
-  alias fuck='$(thefuck $(fc -ln -1))'
-fi
-
+# if we have hub installed;  use it instead of git
 if [ -e "/usr/local/bin/hub" ]; then
   alias git="hub"
 fi
+
+# kubernetes stuff here son!
+if [ -e $(brew --prefix)/bin/kubectl ]; then
+  alias k='kubectl'
+  complete -F __start_kubectl k
+fi
+
+if [ -e $(brew --prefix)/bin/kubectx ]; then
+  alias kctx='kubectx'
+fi
+
+if [ -e $(brew --prefix)/bin/kubens ]; then
+  alias kns='kubens'
+fi
+
 
 #########################################################################
 ##  My OSX Specific Aliases here ##
@@ -76,18 +135,13 @@ if [ `uname` == "Darwin" ]; then
     alias subl='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl' 
   fi
 
-  # Check for IntelliJ IDEA (pro version) and setup an alias for it
-  if [ -e "/Applications/IntelliJ IDEA 14.app" ]; then
-    alias idea="/Applications/IntelliJ\ IDEA\ 14.app/Contents/MacOS/idea"
-  fi
-
 fi
 
 ########################################################################
 # Custom Pathes go here yo!
 ########################################################################
 
-export PATH=$HOME/bin:$PATH
+export PATH=$HOME/bin:/usr/local/sbin:$PATH
 
 if [ -e "/Applications/Postgres.app" ]; then
   export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.3/bin
@@ -101,27 +155,17 @@ if [ -e "/Applications/Visual Studio Code.app" ]; then
   export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 fi
 
+if [ -d "$HOME/.krew/" ]; then
+  export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+fi
+
 ########################################################################
 # Helper Functions and Stuff!!!
 ########################################################################
 
-# Load RVM into a shell session *as a function*
-#if [ -e "$HOME/.rvm/bin" ]; then
-#	[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
-#fi
 
 # OSX Specific here
 if [ `uname` == "Darwin" ]; then
-  # is docker is on the machine, let's source it's info
-  # if [ -e "/usr/local/bin/docker" ]; then
-  #   eval $(docker-machine env default)
-  # fi
-
-  # bash-completion setup?  (homebrew here)
-  # if [ -d $(brew --prefix)/etc/bash_completion.d ]; then
-  #    source "$(brew --prefix)/etc/bash_completion.d/"*
-  #  fi
-
   if [ -e $(brew --prefix)/etc/bash_completion ]; then
     source "$(brew --prefix)/etc/bash_completion"
   fi
@@ -130,25 +174,6 @@ if [ `uname` == "Darwin" ]; then
   # awscli completion
   if [ -e "/usr/local/bin/aws_completer" ]; then
     complete -C '/usr/local/bin/aws_completer' aws
-  fi
-
-  # perl from homebrew
-  #if [ -e "/usr/local/bin/perl" ]; then
-  #  eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
-  #fi
-  #
-  #
-  
-  # homebrew specific bash completion
-  if type brew &>/dev/null; then
-    HOMEBREW_PREFIX="$(brew --prefix)"
-    if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
-      source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
-    else
-      for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*; do
-       [[ -r "$COMPLETION" ]] && source "$COMPLETION"
-      done
-    fi
   fi
 fi
 
@@ -163,65 +188,29 @@ genpasswd() {
     fi
 }
 
-########################################################################
-#  let's make a custom prompt based on the terminals!!!  yay!!
-########################################################################
-         RED="\[\033[0;31m\]"
-      YELLOW="\[\033[01;33m\]"
-       GREEN="\[\033[01;32m\]"
-        BLUE="\[\033[0;34m\]"
-        CYAN="\[\033[0;36m\]"
-   LIGHT_RED="\[\033[1;31m\]"
- LIGHT_GREEN="\[\033[1;32m\]"
-LIGHT_YELLOW="\[\033[0;33m\]"
-       WHITE="\[\033[1;37m\]"
-  LIGHT_GRAY="\[\033[0;37m\]"
-  COLOR_NONE="\[\e[0m\]"
 
-function parse_git_branch {
 
-  git rev-parse --git-dir &> /dev/null
-  git_status="$(git status 2> /dev/null)"
-  branch_pattern="^# On branch ([^${IFS}]*)"
-  remote_pattern="# Your branch is (.*) of"
-  diverge_pattern="# Your branch and (.*) have diverged"
-  #if [[ ! ${git_status}} =~ "working directory clean" ]]; then
-  if [[ ! ${git_status}} =~ "nothing to commit, working tree clean" ]]; then
-    state="${RED}⚡ "
-  fi
-  # add an else if or two here if you want to get more specific
-  if [[ ${git_status} =~ ${remote_pattern} ]]; then
-    if [[ ${BASH_REMATCH[1]} == "ahead" ]]; then
-      remote="${BLUE}↑"
-    else
-      remote="${BLUE}↓"
-    fi
-  fi
-  if [[ ${git_status} =~ ${diverge_pattern} ]]; then
-    remote="${BLUE}↕"
-  fi
-  if [[ ${git_status} =~ ${branch_pattern} ]]; then
-    branch=${BASH_REMATCH[1]}
-    echo " (${branch})${remote}${state}"
-  fi
-}
-function prompt_func() {
-  previous_return_value=$?;
-  #prompt="${TITLEBAR}${BLUE}[${RED}\w${GREEN}$(parse_git_branch)${BLUE}]${COLOR_NONE} "
-  #prompt="\h:${USER_COLOR}\u${COLOR_NONE}:${YELLOW}\w${GREEN}$(parse_git_branch)${COLOR_NONE}:"
-  prompt="${GREEN}[ ${LIGHT_YELLOW}\t ${GREEN}- ${LIGHT_RED}\u ${COLOR_NONE}@ ${CYAN}\h ${LIGHT_GREEN}- ${BLUE}\w ${GREEN}] ${GREEN}$(parse_git_branch)${COLOR_NONE}:"
-  if test $previous_return_value -eq 0
-  then
-    PS1="${prompt}\\$ "
-    #PS1="${prompt}➔ "
-  else
-    PS1="${prompt}${RED}➔${COLOR_NONE} "
-  fi
+###############################################################################
+#                        CUSTOM PROMPTS SON!                                  #
+###############################################################################
+# add kube_ps1 function for a Bash prompt / PS1 for k8s
+if [ -f "$(brew --prefix)/opt/kube-ps1/share/kube-ps1.sh" ]; then
+  source "$(brew --prefix)/opt/kube-ps1/share/kube-ps1.sh"
+fi
+
+# customize Git prompt below with kube_ps1
+function prompt_callback() {
+  echo -n " $(kube_ps1)"
 }
 
-PROMPT_COMMAND=prompt_func
-#export PS1="${GREEN}[ ${YELLOW}\t${GREEN} - ${LIGHT_RED}\u ${COLOR_NONE} @ ${CYAN}\h ${LIGHT_GREEN}- ${BLUE}\w ${GREEN} ] \$ "
+# Bash prompt / PS1 for Git -- prompt is dynamic and uses prompt_callback above
+if [ -f "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]; then
+  __GIT_PROMPT_DIR=$(brew --prefix)/opt/bash-git-prompt/share
+  source "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
+  export  GIT_PROMPT_SHOW_UPSTREAM=1
+fi
 
-
-# iterm2 shell integration stuff here!!
+###############################################################################
+#              iTerm2 / iTerm2 Preferences                                    #
+###############################################################################
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
