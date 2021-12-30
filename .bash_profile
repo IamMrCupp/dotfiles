@@ -57,9 +57,17 @@ if [ -f /usr/local/bin/aks-engine ]; then
 fi
 
 # The next line enables shell command completion for gcloud.
+#  NOTE:  this is from my Windows box for work;  once it's updated to OSX we can change this
 if [ -f '/mnt/c/Users/aaron/Downloads/google-cloud-sdk/completion.bash.inc' ]; then
   source '/mnt/c/Users/aaron/Downloads/google-cloud-sdk/completion.bash.inc';
 fi
+
+# terraform completion via the terraform bin
+#  -- installed via homebrew
+if [ -e $(brew --prefix)/bin/terraform ]; then
+  complete -C $(brew --prefix)/bin/terraform terraform
+fi
+
 
 #########################################################################
 #  aliases ftw!!!
@@ -213,5 +221,3 @@ fi
 #              iTerm2 / iTerm2 Preferences                                    #
 ###############################################################################
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
-
-complete -C /usr/local/bin/terraform terraform
