@@ -163,7 +163,6 @@ fi
 # Helper Functions and Stuff!!!
 ########################################################################
 
-
 # OSX Specific here
 if [ `uname` == "Darwin" ]; then
   if [ -e $(brew --prefix)/etc/bash_completion ]; then
@@ -214,3 +213,5 @@ fi
 #              iTerm2 / iTerm2 Preferences                                    #
 ###############################################################################
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+
+complete -C /usr/local/bin/terraform terraform
