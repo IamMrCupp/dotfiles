@@ -3,15 +3,22 @@
 #
 #
 # This requires some things to be installed:
-# homebrew
-# - brew install bash-completion
-# - brew install bash-git-prompt
-# - brew install kube-ps1
-# - brew install kubectl
-# - brew install kubectx
-# - brew install hub
-# - brew install kubectx-completion
-#
+#   homebrew:
+#   - brew install bash-completion 
+#   - brew install bash-git-prompt 
+#   - brew install kube-ps1 
+#   - brew install kubectl 
+#   - brew install kubectx 
+#   - brew install hub 
+#   - brew install kubectx-completion 
+#   - brew install terraform 
+#   - brew install hub 
+#   - brew install gh
+#   - brew install azure-cli
+#   - brew install awscli
+#   - brew install gcloud-cli
+#   - brew install --cask google-cloud-sdk
+
 #########################################################################
 #  source the global definitions
 #########################################################################
@@ -49,23 +56,32 @@ if type brew &>/dev/null; then
       [[ -r "$COMPLETION" ]] && source "$COMPLETION"
     done
   fi
+
+  # terraform completion via the terraform bin
+  #  -- installed via homebrew
+  if [ -e "${HOMEBREW_PREFIX}/bin/terraform" ]; then
+    complete -C "${HOMEBREW_PREFIX}/bin/terraform" terraform
+  fi
+
+  # The next line enables shell command completion for gcloud.
+  #  --installed via homebrew
+  if [ -f "${HOMEBREW_PREFIX}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc" ]; then
+    source "${HOMEBREW_PREFIX}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc";
+  fi
+
+  # awscli completion
+  #  --installed via homebrew
+  if [ -e "${HOMEBREW_PREFIX}/bin/aws_completer" ]; then
+    complete -C "${HOMEBREW_PREFIX}/bin/aws_completer" aws
+  fi
+
 fi
 
 # aks-engine bash completions
+#  -- this is from the following location:
+#       
 if [ -f /usr/local/bin/aks-engine ]; then
   source <(aks-engine completion)
-fi
-
-# The next line enables shell command completion for gcloud.
-#  NOTE:  this is from my Windows box for work;  once it's updated to OSX we can change this
-if [ -f '/mnt/c/Users/aaron/Downloads/google-cloud-sdk/completion.bash.inc' ]; then
-  source '/mnt/c/Users/aaron/Downloads/google-cloud-sdk/completion.bash.inc';
-fi
-
-# terraform completion via the terraform bin
-#  -- installed via homebrew
-if [ -e $(brew --prefix)/bin/terraform ]; then
-  complete -C $(brew --prefix)/bin/terraform terraform
 fi
 
 
@@ -167,22 +183,15 @@ if [ -d "$HOME/.krew/" ]; then
   export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 fi
 
+# add the google sdk cli tools to the path
+#  -- must be installed via homebrew for this to work
+if [ -e "${HOMEBREW_PREFIX}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc" ]; then
+  source "${HOMEBREW_PREFIX}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc"
+fi
+
 ########################################################################
 # Helper Functions and Stuff!!!
 ########################################################################
-
-# OSX Specific here
-if [ `uname` == "Darwin" ]; then
-  if [ -e $(brew --prefix)/etc/bash_completion ]; then
-    source "$(brew --prefix)/etc/bash_completion"
-  fi
-  
-
-  # awscli completion
-  if [ -e "/usr/local/bin/aws_completer" ]; then
-    complete -C '/usr/local/bin/aws_completer' aws
-  fi
-fi
 
 # password generation function
 genpasswd() {
@@ -195,14 +204,12 @@ genpasswd() {
     fi
 }
 
-
-
 ###############################################################################
 #                        CUSTOM PROMPTS SON!                                  #
 ###############################################################################
 # add kube_ps1 function for a Bash prompt / PS1 for k8s
-if [ -f "$(brew --prefix)/opt/kube-ps1/share/kube-ps1.sh" ]; then
-  source "$(brew --prefix)/opt/kube-ps1/share/kube-ps1.sh"
+if [ -f "${HOMEBREW_PREFIX}/opt/kube-ps1/share/kube-ps1.sh" ]; then
+  source "${HOMEBREW_PREFIX}/opt/kube-ps1/share/kube-ps1.sh"
 fi
 
 # customize Git prompt below with kube_ps1
@@ -211,9 +218,9 @@ function prompt_callback() {
 }
 
 # Bash prompt / PS1 for Git -- prompt is dynamic and uses prompt_callback above
-if [ -f "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]; then
-  __GIT_PROMPT_DIR=$(brew --prefix)/opt/bash-git-prompt/share
-  source "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
+if [ -f "${HOMEBREW_PREFIX}/opt/bash-git-prompt/share/gitprompt.sh" ]; then
+  __GIT_PROMPT_DIR="${HOMEBREW_PREFIX}/opt/bash-git-prompt/share"
+  source "${HOMEBREW_PREFIX}/opt/bash-git-prompt/share/gitprompt.sh"
   export  GIT_PROMPT_SHOW_UPSTREAM=1
 fi
 
