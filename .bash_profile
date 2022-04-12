@@ -3,26 +3,47 @@
 #
 #
 # This requires some things to be installed:
-#   homebrew:
-#   - brew install bash-completion 
-#   - brew install bash-git-prompt 
-#   - brew install kube-ps1 
-#   - brew install kubectl 
-#   - brew install kubectx 
-#   - brew install hub 
-#   - brew install terraform 
-#   - brew install hub 
-#   - brew install gh
-#   - brew install azure-cli
-#   - brew install awscli
-#   - brew install --cask google-cloud-sdk
+#   homebrew:  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+#
+# brew tap homebrew/cask-fonts
+# brew tap hashicorp/tap
+#
+# brew install bash \
+#  bash-completion \
+#  bash-git-prompt \
+#  font-hack \
+#  fx \
+#  fzf \
+#  gh \
+#  hub \
+#  helm \
+#  helm@2 \
+#  iproute2mac \
+#  jq \
+#  kube-ps1 \
+#  kubectx \
+#  kubernetes-cli \
+#  python3 \
+#  stern \
+#  terraform \
+#  vault \
+#  velero \
+#  azure-cli \
+#  awscli \
+#  balena-cli \
+#  circle-ci
+#
+# brew install --cask google-cloud-sdk
+# brew install --cask lens
+# brew install --cask dbeaver-community 
+# brew install --cask docker
+# brew install --cask keystore-exporer
+# brew install --cask sublime-text
 
 #########################################################################
 #  source the global definitions
 #########################################################################
-
 eval "$(/opt/homebrew/bin/brew shellenv)"
-
 
 if [ -f /etc/bashrc ]; then
   . /etc/bashrc
@@ -42,6 +63,17 @@ with_env() {
 export GOPATH="${HOME}/.go"
 export GOROOT="$(brew --prefix golang)/libexec"
 export PATH="$PATH:$GOPATH/bin:${GOROOT}/bin"
+
+# do we have a env folder present
+if [ -d "${HOME}/.env" ]; then
+  # load the dotenv files
+  for file in "${HOME}/.env/"*; do
+    if [ -f "$file" ]; then
+      echo "Loading $file"
+      . "$file"
+    fi
+  done
+fi
 
 ###############################################################################
 #                       ENABLE BASH COMPLETION                                #
@@ -79,8 +111,6 @@ if type brew &>/dev/null; then
 fi
 
 # aks-engine bash completions
-#  -- this is from the following location:
-#       
 if [ -f /usr/local/bin/aks-engine ]; then
   source <(aks-engine completion)
 fi
