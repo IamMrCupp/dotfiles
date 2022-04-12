@@ -3,7 +3,7 @@
 	smudge = git-media-smudge %f
 [user]
 	name = Aaron Cupp
-	email = mrcupp@mrcupp.com
+	email = acupp@sightmachine.com
 	username = IamMrCupp
 [push]
 	default = simple

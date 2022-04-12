@@ -10,18 +10,19 @@
 #   - brew install kubectl 
 #   - brew install kubectx 
 #   - brew install hub 
-#   - brew install kubectx-completion 
 #   - brew install terraform 
 #   - brew install hub 
 #   - brew install gh
 #   - brew install azure-cli
 #   - brew install awscli
-#   - brew install gcloud-cli
 #   - brew install --cask google-cloud-sdk
 
 #########################################################################
 #  source the global definitions
 #########################################################################
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 
 if [ -f /etc/bashrc ]; then
   . /etc/bashrc
@@ -84,6 +85,8 @@ if [ -f /usr/local/bin/aks-engine ]; then
   source <(aks-engine completion)
 fi
 
+# hashicotrp vault bash completions
+complete -C /opt/homebrew/bin/vault vault
 
 #########################################################################
 #  aliases ftw!!!
@@ -228,3 +231,4 @@ fi
 #              iTerm2 / iTerm2 Preferences                                    #
 ###############################################################################
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+eval "$(/opt/homebrew/bin/brew shellenv)"
