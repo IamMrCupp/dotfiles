@@ -215,7 +215,7 @@ fi
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
 ###############################################################################
-#                    Directory Environment Hook                               #
+#                              Environment Hook                               #
 ###############################################################################
 eval "$(direnv hook bash)"
 eval "$(${HOMEBREW_PREFIX}/bin/brew shellenv)"
