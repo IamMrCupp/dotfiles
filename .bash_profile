@@ -1,42 +1,33 @@
 #!/bin/bash
 # Custom .bash_profile for OSX / Linux / Unix machines w/ bash or dash
 #
-#
 # This requires some things to be installed:
 #   homebrew:
-#   - brew install bash-completion 
-#   - brew install bash-git-prompt 
-#   - brew install kube-ps1 
-#   - brew install kubectl 
-#   - brew install kubectx 
-#   - brew install hub 
-#   - brew install kubectx-completion 
-#   - brew install terraform 
-#   - brew install hub 
-#   - brew install gh
-#   - brew install azure-cli
-#   - brew install awscli
-#   - brew install gcloud-cli
-#   - brew install --cask google-cloud-sdk
-
+#     install the applications via the Brewfile in our dotfile repo
+#
+#
 #########################################################################
 #  source the global definitions
 #########################################################################
-
 if [ -f /etc/bashrc ]; then
   . /etc/bashrc
 fi
 
 #########################################################################
-#   Custom Environment Variables via hidden files
+#   Custom Environment Variables
 #########################################################################
-#with_env() {
-#  (set -a && . ./.env && "$@")
-#}
+# Load everything in HOME/.env/
+# -- these are all basic shell scripts w/ exports
+if [ -d "${HOME}/.env" ]; then
+  # load the dotenv directory files
+  for file in "${HOME}/.env/"*; do
+    if [ -f "$file" ]; then
+      echo "Loading $file"
+      . "$file"
+    fi
+  done
+fi
 
-#########################################################################
-#   Custom Environment Variables 
-#########################################################################
 # go development related
 export GOPATH="${HOME}/.go"
 export GOROOT="$(brew --prefix golang)/libexec"
@@ -58,32 +49,26 @@ if type brew &>/dev/null; then
   fi
 
   # terraform completion via the terraform bin
-  #  -- installed via homebrew
   if [ -e "${HOMEBREW_PREFIX}/bin/terraform" ]; then
     complete -C "${HOMEBREW_PREFIX}/bin/terraform" terraform
   fi
 
   # The next line enables shell command completion for gcloud.
-  #  --installed via homebrew
   if [ -f "${HOMEBREW_PREFIX}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc" ]; then
     source "${HOMEBREW_PREFIX}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc";
   fi
 
   # awscli completion
-  #  --installed via homebrew
   if [ -e "${HOMEBREW_PREFIX}/bin/aws_completer" ]; then
     complete -C "${HOMEBREW_PREFIX}/bin/aws_completer" aws
   fi
 
-fi
+  # hashicorp vault bash completions
+  if [ -e "${HOMEBREW_PREFIX}/bin/vault" ]; then
+    complete -C "${HOMEBREW_PREFIX}/bin/vault" vault
+  fi
 
-# aks-engine bash completions
-#  -- this is from the following location:
-#       
-if [ -f /usr/local/bin/aks-engine ]; then
-  source <(aks-engine completion)
 fi
-
 
 #########################################################################
 #  aliases ftw!!!
@@ -233,3 +218,4 @@ test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shel
 #                    Directory Environment Hook                               #
 ###############################################################################
 eval "$(direnv hook bash)"
+eval "$(${HOMEBREW_PREFIX}/bin/brew shellenv)"
