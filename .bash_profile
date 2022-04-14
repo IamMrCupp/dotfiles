@@ -3,8 +3,7 @@
 #
 # This requires some things to be installed:
 #   homebrew:
-#     install the applications via the Brewfile in our dotfile repo
-#
+#     brew bundle --file $HOME/Code/dotfiles/Brewfile
 #
 #########################################################################
 #  source the global definitions
