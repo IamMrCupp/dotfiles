@@ -213,6 +213,24 @@ fi
 ###############################################################################
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
+
+###############################################################################
+#             virtualenvwrapper setup here                                    #
+###############################################################################
+export WORKON_HOME=$HOME/.virtualenvs
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+export PROJECT_HOME=$HOME/Devel
+source /usr/local/bin/virtualenvwrapper.sh
+
+###############################################################################
+#              ruby virtual environments                                      #
+###############################################################################
+#source $(brew --prefix)/opt/chruby/share/chruby/chruby.sh
+#source $(brew --prefix)/opt/chruby/share/chruby/auto.sh
+#chruby ruby-3.1.3 
+
+eval "$(rbenv init - bash)"
+
 ###############################################################################
 #                              Environment Hook                               #
 ###############################################################################
